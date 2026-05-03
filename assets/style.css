@@ -1,0 +1,104 @@
+/* ============================================================
+   LYKY - style.css
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #8B5CF6;
+  --primary-dark: #7C3AED;
+  --accent: #F59E0B;
+  --dark: #0F0A1E;
+  --dark2: #1A1030;
+  --text: #E2D9F3;
+  --text-muted: #9CA3AF;
+  --white: #FFFFFF;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(139,92,246,.3);
+}
+
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* HEADER */
+.header { background: rgba(15,10,30,.95); border-bottom: 1px solid rgba(139,92,246,.2); padding: 16px 0; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px); }
+.nav { display: flex; align-items: center; justify-content: space-between; }
+.brand { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+.btn-nav { background: var(--primary); color: var(--white); border: none; padding: 8px 20px; border-radius: 20px; font-weight: 600; cursor: pointer; text-decoration: none; font-size: 0.9rem; transition: background .2s; }
+.btn-nav:hover { background: var(--primary-dark); }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, var(--dark) 0%, #2D1B69 50%, var(--dark2) 100%); padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,.4) 0%, transparent 70%); pointer-events: none; }
+.hero-content { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+.hero h1 span { color: var(--primary); }
+.hero-sub { font-size: 1.15rem; color: var(--text-muted); max-width: 520px; margin: 0 auto 32px; }
+
+.btn-primary { display: inline-block; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); padding: 14px 36px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: var(--shadow); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,.5); }
+
+/* FEATURES */
+.features { padding: 60px 0; background: var(--dark2); }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.feature { background: rgba(255,255,255,.04); border: 1px solid rgba(139,92,246,.2); border-radius: var(--radius); padding: 28px 24px; text-align: center; transition: border-color .2s, transform .2s; }
+.feature:hover { border-color: var(--primary); transform: translateY(-4px); }
+.feature-icon { font-size: 2.2rem; margin-bottom: 12px; }
+.feature h3 { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.feature p { font-size: 0.9rem; color: var(--text-muted); }
+
+/* INSCRIPTION FORM */
+.inscription-section { padding: 60px 0 80px; }
+.inscription-section h2 { font-size: 2rem; font-weight: 800; color: var(--white); text-align: center; margin-bottom: 8px; }
+.section-sub { text-align: center; color: var(--text-muted); margin-bottom: 40px; }
+
+.form { background: rgba(255,255,255,.04); border: 1px solid rgba(139,92,246,.2); border-radius: 16px; padding: 40px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,.07); border: 1px solid rgba(139,92,246,.3); border-radius: 8px; padding: 12px 14px; color: var(--white); font-size: 0.95rem; transition: border-color .2s, box-shadow .2s; outline: none; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139,92,246,.2); }
+.form-group select option { background: var(--dark2); }
+.form-group textarea { resize: vertical; min-height: 90px; }
+
+.form-error { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.4); border-radius: 8px; padding: 12px 16px; color: #FCA5A5; margin-bottom: 16px; font-size: 0.9rem; }
+
+.btn-submit { width: 100%; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: var(--white); border: none; padding: 16px 32px; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s; box-shadow: var(--shadow); }
+.btn-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,.5); }
+.btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* PAIEMENT PAGE */
+.paiement-section { padding: 60px 0; min-height: calc(100vh - 140px); }
+.paiement-card { background: rgba(255,255,255,.04); border: 1px solid rgba(139,92,246,.2); border-radius: 16px; padding: 48px; max-width: 680px; margin: 0 auto; }
+.success-icon { width: 64px; height: 64px; background: linear-gradient(135deg, #10B981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: white; margin: 0 auto 20px; font-weight: 700; }
+.paiement-card h1 { font-size: 1.8rem; font-weight: 800; color: var(--white); text-align: center; margin-bottom: 8px; }
+.paiement-sub { text-align: center; color: var(--text-muted); margin-bottom: 32px; }
+
+.inscription-recap, .bank-details, .next-steps { background: rgba(255,255,255,.04); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,.08); }
+.inscription-recap h3, .bank-details h3, .next-steps h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+.bank-table { display: grid; gap: 8px; }
+.bank-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.bank-row:last-child { border-bottom: none; }
+.bank-label { font-size: 0.875rem; color: var(--text-muted); }
+.bank-value { font-size: 0.95rem; font-weight: 600; color: var(--white); }
+.bank-notice { margin-top: 16px; background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.3); border-radius: 8px; padding: 12px 16px; font-size: 0.875rem; color: #FCD34D; }
+.ref-badge { background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.9rem; }
+
+.next-steps ol { padding-left: 20px; }
+.next-steps li { margin-bottom: 8px; color: var(--text); font-size: 0.95rem; }
+.contact-info { text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+.contact-info a { color: var(--primary); text-decoration: none; }
+
+/* FOOTER */
+.footer { background: rgba(0,0,0,.3); border-top: 1px solid rgba(139,92,246,.15); padding: 32px 0; text-align: center; }
+.footer p { color: var(--text-muted); font-size: 0.875rem; }
+.footer a { color: var(--primary); text-decoration: none; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .form-row { grid-template-columns: 1fr; }
+  .form { padding: 24px 20px; }
+  .paiement-card { padding: 24px 20px; }
+  .bank-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+}
