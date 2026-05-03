@@ -1,0 +1,10 @@
+# Secrets & config
+.env
+secrets.json
+.env.local
+
+# macOS
+.DS_Store
+
+# Node
+node_modules/
