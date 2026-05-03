@@ -30,6 +30,145 @@
 
       <div class="inscription-recap" id="inscriptionRecap">
         <h3 data-fr="R&#233;capitulatif" data-en="Summary">R&#233;capitulatif</h3>
+        <div id="recapContent">Chargement...</div>
+      </div>
+
+      <div class="bank-details">
+        <h3 data-fr="&#128179; Informations de Paiement" data-en="&#128179; Payment Details">&#128179; Informations de Paiement</h3>
+        <p data-fr="Veuillez effectuer un virement bancaire aux coordonn&#233;es suivantes :" data-en="Please make a bank transfer to the following details:">Veuillez effectuer un virement bancaire aux coordonn&#233;es suivantes :</p>
+        <div class="bank-table">
+          <div class="bank-row">
+            <span class="bank-label" data-fr="B&#233;n&#233;ficiaire" data-en="Beneficiary">B&#233;n&#233;ficiaire</span>
+            <span class="bank-value" id="bankBeneficiary">Mirella Toussaint</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label" data-fr="Banque" data-en="Bank">Banque</span>
+            <span class="bank-value" id="bankName">DBS Bank (Hong Kong) Limited</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label" data-fr="Num&#233;ro de compte" data-en="Account number">Num&#233;ro de compte</span>
+            <span class="bank-value" id="bankAccount">004-800-6-003899-3</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label" data-fr="Code SWIFT" data-en="SWIFT code">Code SWIFT</span>
+            <span class="bank-value" id="bankSwift">DHBKHKHH</span>
+          </div>
+        </div>
+        <div class="bank-notice">
+          <strong data-fr="&#9888; Important :" data-en="&#9888; Important:">&#9888; Important :</strong>
+          <span data-fr=" Mentionnez votre r&#233;f&#233;rence " data-en=" Please include your reference "> Mentionnez votre r&#233;f&#233;rence </span>
+          <span id="refId" class="ref-badge">-</span>
+          <span data-fr=" dans le libell&#233; du virement." data-en=" in the payment reference."> dans le libell&#233; du virement.</span>
+        </div>
+      </div>
+
+      <div class="next-steps">
+        <h3 data-fr="Prochaines &#233;tapes" data-en="Next steps">Prochaines &#233;tapes</h3>
+        <ol>
+          <li data-fr="Effectuez le virement avec votre r&#233;f&#233;rence" data-en="Make the transfer with your reference">Effectuez le virement avec votre r&#233;f&#233;rence</li>
+          <li data-fr="Vous recevrez un email de confirmation &#224; votre adresse" data-en="You will receive a confirmation email at your address">Vous recevrez un email de confirmation &#224; votre adresse</li>
+          <li data-fr="Nous vous contacterons pour fixer les horaires" data-en="We will contact you to schedule your lessons">Nous vous contacterons pour fixer les horaires</li>
+        </ol>
+      </div>
+
+      <p class="contact-info">
+        <span data-fr="Des questions ?&#160;" data-en="Any questions?&#160;">Des questions ?&#160;</span>
+        <a href="mailto:toussaintmirella@gmail.com">toussaintmirella@gmail.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 Mirella Toussaint</p>
+  </div>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOapeca-qCbFfrKTLNIa4v5lUpHv01bhlV_Mlp5r4sARNOv8H_BJIaAcN_UnVkZ0uOnA/exec";
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = txt;
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = txt;
+      } else {
+        el.innerHTML = txt;
+      }
+    }
+  });
+  document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const lang = localStorage.getItem('lang') || 'fr';
+  setLang(lang);
+
+  const data = JSON.parse(sessionStorage.getItem('inscriptionData') || '{}');
+  const result = JSON.parse(sessionStorage.getItem('inscriptionResult') || '{}');
+
+  if (data.prenom) {
+    const nameLabel = lang === 'en' ? 'Name' : 'Nom';
+    const packageLabel = lang === 'en' ? 'Package' : 'Formule';
+    document.getElementById('recapContent').innerHTML =
+      '<p><strong>' + nameLabel + ' :</strong> ' + data.prenom + ' ' + data.nom + '</p>' +
+      '<p><strong>Email :</strong> ' + data.email + '</p>' +
+      '<p><strong>' + packageLabel + ' :</strong> ' + data.formule + '</p>';
+  }
+
+  if (result.id) {
+    document.getElementById('refId').textContent = result.id;
+  }
+
+  if (result.bankDetails) {
+    const bd = result.bankDetails;
+    if (bd.beneficiary) document.getElementById('bankBeneficiary').textContent = bd.beneficiary;
+    if (bd.bank) document.getElementById('bankName').textContent = bd.bank;
+    if (bd.account) document.getElementById('bankAccount').textContent = bd.account;
+    if (bd.swift) document.getElementById('bankSwift').textContent = bd.swift;
+  }
+});
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr" id="htmlRoot">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirella Toussaint - Confirmation Paiement</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="brand">&#127908; Mirella Toussaint</div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnFR" onclick="setLang('fr')">FR</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="index.html" class="btn-nav" data-fr="Retour" data-en="Back">Retour</a>
+    </div>
+  </nav>
+</header>
+
+<section class="paiement-section">
+  <div class="container">
+    <div class="paiement-card">
+      <div class="success-icon">&#10003;</div>
+      <h1 data-fr="Inscription Confirm&#233;e !" data-en="Registration Confirmed!">Inscription Confirm&#233;e !</h1>
+      <p class="paiement-sub" data-fr="Merci pour votre inscription aux cours de chant de Mirella Toussaint." data-en="Thank you for registering for Mirella Toussaint's singing lessons.">Merci pour votre inscription aux cours de chant de Mirella Toussaint.</p>
+
+      <div class="inscription-recap" id="inscriptionRecap">
+        <h3 data-fr="R&#233;capitulatif" data-en="Summary">R&#233;capitulatif</h3>
         <div id="recapContent" data-loading-fr="Chargement..." data-loading-en="Loading...">Chargement...</div>
       </div>
 
