@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYKY - Confirmation Paiement</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="brand">&#127908; LYKY</div>
+    <a href="index.html" class="btn-nav">Retour</a>
+  </nav>
+</header>
+
+<section class="paiement-section">
+  <div class="container">
+    <div class="paiement-card">
+      <div class="success-icon">&#10003;</div>
+      <h1>Inscription Confirm&#233;e !</h1>
+      <p class="paiement-sub">Merci pour votre inscription aux cours de chant LYKY.</p>
+      
+      <div class="inscription-recap" id="inscriptionRecap">
+        <h3>R&#233;capitulatif</h3>
+        <div id="recapContent">Chargement...</div>
+      </div>
+
+      <div class="bank-details">
+        <h3>&#128179; Informations de Paiement</h3>
+        <p>Veuillez effectuer un virement bancaire aux coordonn&#233;es suivantes :</p>
+        <div class="bank-table">
+          <div class="bank-row">
+            <span class="bank-label">B&#233;n&#233;ficiaire</span>
+            <span class="bank-value" id="bankBeneficiary">Mirella Toussaint</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Banque</span>
+            <span class="bank-value" id="bankName">DBS Bank (Hong Kong) Limited</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Num&#233;ro de compte</span>
+            <span class="bank-value" id="bankAccount">004-800-6-003899-3</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-label">Code SWIFT</span>
+            <span class="bank-value" id="bankSwift">DHBKHKHH</span>
+          </div>
+        </div>
+        <div class="bank-notice">
+          <strong>&#9888; Important :</strong> Mentionnez votre r&#233;f&#233;rence 
+          <span id="refId" class="ref-badge">-</span> dans le libell&#233; du virement.
+        </div>
+      </div>
+
+      <div class="next-steps">
+        <h3>Prochaines &#233;tapes</h3>
+        <ol>
+          <li>Effectuez le virement avec votre r&#233;f&#233;rence</li>
+          <li>Vous recevrez un email de confirmation &#224; votre adresse</li>
+          <li>Nous vous contacterons pour fixer les horaires</li>
+        </ol>
+      </div>
+
+      <p class="contact-info">
+        Des questions ? &#160;
+        <a href="mailto:lykylabelfrance@gmail.com">lykylabelfrance@gmail.com</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 LYKY Label France</p>
+  </div>
+</footer>
+
+<script>
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOapeca-qCbFfrKTLNIa4v5lUpHv01bhlV_Mlp5r4sARNOv8H_BJIaAcN_UnVkZ0uOnA/exec";
+
+// Afficher le recap depuis les params URL ou sessionStorage
+window.addEventListener('DOMContentLoaded', () => {
+  const data = JSON.parse(sessionStorage.getItem('inscriptionData') || '{}');
+  const result = JSON.parse(sessionStorage.getItem('inscriptionResult') || '{}');
+  
+  if (data.prenom) {
+    document.getElementById('recapContent').innerHTML = 
+      '<p><strong>Nom :</strong> ' + data.prenom + ' ' + data.nom + '</p>' +
+      '<p><strong>Email :</strong> ' + data.email + '</p>' +
+      '<p><strong>Formule :</strong> ' + data.formule + '</p>';
+  }
+  
+  if (result.id) {
+    document.getElementById('refId').textContent = result.id;
+  }
+  
+  if (result.bankDetails) {
+    const bd = result.bankDetails;
+    if (bd.beneficiary) document.getElementById('bankBeneficiary').textContent = bd.beneficiary;
+    if (bd.bank) document.getElementById('bankName').textContent = bd.bank;
+    if (bd.account) document.getElementById('bankAccount').textContent = bd.account;
+    if (bd.swift) document.getElementById('bankSwift').textContent = bd.swift;
+  }
+});
+</script>
+</body>
+</html>
