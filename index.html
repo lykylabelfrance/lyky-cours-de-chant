@@ -1,4 +1,120 @@
 <!DOCTYPE html>
+<html lang="fr" id="htmlRoot">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirella Toussaint - Cours de Chant Hong Kong</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="brand">&#127908; Mirella Toussaint</div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnFR" onclick="setLang('fr')">FR</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <a href="#inscription" class="btn-nav" data-fr="S'inscrire" data-en="Register">S'inscrire</a>
+    </div>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-content container">
+    <h1 data-fr="Cours de Chant&lt;br&gt;&lt;span&gt;Professionnels&lt;/span&gt;" data-en="Professional&lt;br&gt;&lt;span&gt;Singing Lessons&lt;/span&gt;">Cours de Chant<br><span>Professionnels</span></h1>
+    <p class="hero-sub" data-fr="Hong Kong &#8212; D&#233;veloppez votre voix avec des cours personnalis&#233;s" data-en="Hong Kong &#8212; Develop your voice with personalised singing lessons">Hong Kong &#8212; D&#233;veloppez votre voix avec des cours personnalis&#233;s</p>
+    <a href="#inscription" class="btn-primary" data-fr="R&#233;server ma place" data-en="Book my spot">R&#233;server ma place</a>
+  </div>
+</section>
+<section id="inscription" class="inscription-section">
+  <div class="container">
+    <h2 data-fr="S'inscrire aux cours" data-en="Register for lessons">S'inscrire aux cours</h2>
+    <form id="inscriptionForm" class="form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenom" data-fr="Pr&#233;nom *" data-en="First name *">Pr&#233;nom *</label>
+          <input type="text" id="prenom" name="prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="nom" data-fr="Nom *" data-en="Last name *">Nom *</label>
+          <input type="text" id="nom" name="nom" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="telephone" data-fr="T&#233;l&#233;phone *" data-en="Phone *">T&#233;l&#233;phone *</label>
+          <input type="tel" id="telephone" name="telephone" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="formule" data-fr="Formule *" data-en="Package *">Formule *</label>
+        <select id="formule" name="formule" required>
+          <option value="" data-fr="-- Choisir --" data-en="-- Choose --">-- Choisir --</option>
+          <option value="Cours decouverte 1h" data-fr="Cours d&#233;couverte 1h" data-en="Discovery lesson 1h">Cours d&#233;couverte 1h</option>
+          <option value="Pack 4 cours" data-fr="Pack 4 cours" data-en="Pack 4 lessons">Pack 4 cours</option>
+          <option value="Pack 8 cours" data-fr="Pack 8 cours" data-en="Pack 8 lessons">Pack 8 cours</option>
+          <option value="Abonnement mensuel" data-fr="Abonnement mensuel" data-en="Monthly subscription">Abonnement mensuel</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="niveau" data-fr="Niveau" data-en="Level">Niveau</label>
+        <select id="niveau" name="niveau">
+          <option value="" data-fr="-- Niveau --" data-en="-- Level --">-- Niveau --</option>
+          <option value="Debutant" data-fr="D&#233;butant" data-en="Beginner">D&#233;butant</option>
+          <option value="Intermediaire" data-fr="Interm&#233;diaire" data-en="Intermediate">Interm&#233;diaire</option>
+          <option value="Avance" data-fr="Avanc&#233;" data-en="Advanced">Avanc&#233;</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message" data-fr="Message" data-en="Message">Message</label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+      <div id="formError" class="form-error" style="display:none;"></div>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span id="btnText" data-fr="Confirmer mon inscription &#8594;" data-en="Confirm my registration &#8594;">Confirmer mon inscription &#8594;</span>
+        <span id="btnLoading" style="display:none;" data-fr="Envoi en cours..." data-en="Sending...">Envoi en cours...</span>
+      </button>
+    </form>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 Mirella Toussaint</p>
+    <p><a href="mailto:lykylabelfrance@gmail.com">lykylabelfrance@gmail.com</a></p>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+<script>
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+  document.querySelectorAll('[data-fr]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = txt;
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = txt;
+      } else {
+        el.innerHTML = txt;
+      }
+    }
+  });
+  document.getElementById('btnFR').classList.toggle('active', lang === 'fr');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+}
+(function() {
+  const saved = localStorage.getItem('lang') || 'fr';
+  setLang(saved);
+})();
+</script>
+</body>
+</html><!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
