@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYKY - Cours de Chant Hong Kong</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="brand">&#127908; LYKY</div>
+    <a href="#inscription" class="btn-nav">S&#39;inscrire</a>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-content container">
+    <h1>Cours de Chant<br><span>Professionnels</span></h1>
+    <p class="hero-sub">Hong Kong &#8212; D&#233;veloppez votre voix avec des cours personnalis&#233;s</p>
+    <a href="#inscription" class="btn-primary">R&#233;server ma place</a>
+  </div>
+</section>
+<section id="inscription" class="inscription-section">
+  <div class="container">
+    <h2>S&#39;inscrire aux cours</h2>
+    <form id="inscriptionForm" class="form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="prenom">Pr&#233;nom *</label>
+          <input type="text" id="prenom" name="prenom" required>
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom *</label>
+          <input type="text" id="nom" name="nom" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="telephone">T&#233;l&#233;phone *</label>
+          <input type="tel" id="telephone" name="telephone" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="formule">Formule *</label>
+        <select id="formule" name="formule" required>
+          <option value="">-- Choisir --</option>
+          <option value="Cours decouverte 1h">Cours d&#233;couverte 1h</option>
+          <option value="Pack 4 cours">Pack 4 cours</option>
+          <option value="Pack 8 cours">Pack 8 cours</option>
+          <option value="Abonnement mensuel">Abonnement mensuel</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="niveau">Niveau</label>
+        <select id="niveau" name="niveau">
+          <option value="">-- Niveau --</option>
+          <option value="Debutant">D&#233;butant</option>
+          <option value="Intermediaire">Interm&#233;diaire</option>
+          <option value="Avance">Avanc&#233;</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="3"></textarea>
+      </div>
+      <div id="formError" class="form-error" style="display:none;"></div>
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span id="btnText">Confirmer mon inscription &#8594;</span>
+        <span id="btnLoading" style="display:none;">Envoi en cours...</span>
+      </button>
+    </form>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <p>&#169; 2026 LYKY Label France</p>
+    <p><a href="mailto:lykylabelfrance@gmail.com">lykylabelfrance@gmail.com</a></p>
+  </div>
+</footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
